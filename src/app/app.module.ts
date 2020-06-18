@@ -16,6 +16,7 @@ import { CreateProductComponent } from './Components/Products/create-product/cre
 import { ProductsGridComponent } from './Components/Home/products-grid/products-grid.component';
 import { HomeComponent } from './Components/Home/home/home.component';
 import { MapsComponent } from './Components/Maps/maps/maps.component';
+import { NavBarComponent } from './Components/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { MapsComponent } from './Components/Maps/maps/maps.component';
     CreateProductComponent,
     ProductsGridComponent,
     HomeComponent,
-    MapsComponent
+    MapsComponent,
+    NavBarComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
