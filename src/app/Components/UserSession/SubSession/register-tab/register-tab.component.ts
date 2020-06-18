@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/Services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-tab',
@@ -9,7 +11,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class RegisterTabComponent implements OnInit {
   registerForm: FormGroup;
 
-  constructor() { 
+  constructor(private authService: AuthService, private router: Router) { 
     this.registerForm = this.createFormGroup();
   }
 
@@ -32,7 +34,11 @@ export class RegisterTabComponent implements OnInit {
   }
   
   onRegister() {
-   
+    this.authService.SignUp(this.model.email.value, this.model.password.value, this.model.username.value).then((result) => {
+      this.router.navigate(['login'])
+    }).catch((error) => {
+      window.alert(error.message)
+    })
   }
 
 }

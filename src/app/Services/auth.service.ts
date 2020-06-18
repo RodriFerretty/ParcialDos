@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  constructor(public afAuth: AngularFireAuth, public router: Router, private afs: AngularFirestore) { 
+  constructor(public afAuth: AngularFireAuth, public router: Router, private afs: AngularFirestore) {
 
   }
 
@@ -16,10 +16,27 @@ export class AuthService {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        result.user.updateProfile({displayName: displayName}).then(() => this.router.navigate(['login']) )
+        result.user.updateProfile({ displayName: displayName })
       })
       .catch((error) => {
         window.alert(error.message);
       });
   }
+
+  SignIn(email, password): Promise<void> {
+    return this.afAuth
+      .signInWithEmailAndPassword(email, password).then((result) => {
+
+      });
+  }
+
+  LogOut() {
+    console.log("En el Logout")
+    return this.afAuth.signOut().then(() => {
+      this.router.navigate(['login']);
+    });
+  }
+
+
+
 }

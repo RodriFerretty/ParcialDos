@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
   selector: 'app-login-tab',
@@ -10,7 +12,7 @@ export class LoginTabComponent implements OnInit {
 
   contactForm: FormGroup;
 
-  constructor() {
+  constructor(private authService: AuthService, private router: Router) {
     this.contactForm = this.createFormGroup();
   }
 
@@ -41,7 +43,12 @@ export class LoginTabComponent implements OnInit {
   }
 
   onSignIn() {
-    
+    this.authService.SignIn(this.model.email.value, this.model.password.value).then((result) => {
+      console.log("Result: ", result)
+      this.router.navigate(['home'])
+    }).catch((error) => {
+      window.alert(error.message)
+    })
   }
 
 }
