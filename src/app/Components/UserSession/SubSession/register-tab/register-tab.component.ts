@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register-tab',
@@ -6,10 +7,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register-tab.component.css']
 })
 export class RegisterTabComponent implements OnInit {
+  registerForm: FormGroup;
 
-  constructor() { }
+  constructor() { 
+    this.registerForm = this.createFormGroup();
+  }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  onSubmit() {
+    this.onRegister()
+  }
+
+  get model() {
+    return this.registerForm.controls;
+  }
+
+  createFormGroup() {
+    return new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      username: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+    });
+  }
+  
+  onRegister() {
+   
   }
 
 }
